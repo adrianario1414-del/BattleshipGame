@@ -219,13 +219,53 @@ function drawBoard(){
     }
 
     // поле противника
-    for(let i = 0; i < 100; i++){
+    for(let y = 0; y < SIZE; y++){
+
+    for(let x = 0; x < SIZE; x++){
 
         const enemyCell = document.createElement("div");
 
         enemyCell.classList.add("cell");
 
+        enemyCell.addEventListener("click", () => {
+
+            if(
+                enemyCell.classList.contains("hit") ||
+                enemyCell.classList.contains("miss")
+            ){
+                return;
+            }
+
+            if(enemyBoardData[y][x] === 1){
+
+                enemyCell.classList.add("hit");
+
+                enemyBoardData[y][x] = 2;
+
+                hits++;
+
+                document.getElementById("hits").textContent = hits;
+
+                document.getElementById("status").textContent =
+                "💖 Попадание!";
+
+            }
+            else{
+
+                enemyCell.classList.add("miss");
+
+                document.getElementById("status").textContent =
+                "🌊 Мимо";
+
+            }
+
+        });
+
         enemyBoard.appendChild(enemyCell);
+
+    }
+
+}
 
     }
 
