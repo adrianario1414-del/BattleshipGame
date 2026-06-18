@@ -1,87 +1,162 @@
 const playerBoard = document.getElementById("playerBoard");
-const enemyBoard = document.getElementById("enemyBoard");
-const statusText = document.getElementById("status");
-const hitsText = document.getElementById("hits");
-const shipsLeftText = document.getElementById("shipsLeft");
-const restartBtn = document.getElementById("restartBtn");
 
-let hits = 0;
-let shipsLeft = 15;
+const SIZE = 10;
 
-function createBoards() {
+const ships = [4,3,3,2,2,2,1,1,1,1];
 
-    playerBoard.innerHTML = "";
-    enemyBoard.innerHTML = "";
+let board = [];
 
-    hits = 0;
-    shipsLeft = 15;
+function createEmptyBoard(){
 
-    hitsText.textContent = hits;
-    shipsLeftText.textContent = shipsLeft;
+    board = [];
 
-    statusText.textContent = "Начни стрелять! ⚓";
+    for(let y = 0; y < SIZE; y++){
 
-    for (let i = 0; i < 100; i++) {
+        let row = [];
 
-        // поле игрока
-        const playerCell = document.createElement("div");
-        playerCell.classList.add("cell");
+        for(let x = 0; x < SIZE; x++){
 
-        if (Math.random() < 0.15) {
-            playerCell.classList.add("ship");
+            row.push(0);
+
         }
 
-        playerBoard.appendChild(playerCell);
-
-        // поле врага
-        const enemyCell = document.createElement("div");
-        enemyCell.classList.add("cell");
-
-        enemyCell.dataset.ship =
-            Math.random() < 0.15 ? "true" : "false";
-
-        enemyCell.addEventListener("click", () => {
-
-            if (
-                enemyCell.classList.contains("hit") ||
-                enemyCell.classList.contains("miss")
-            ) {
-                return;
-            }
-
-            if (enemyCell.dataset.ship === "true") {
-
-                enemyCell.classList.add("hit");
-
-                hits++;
-                shipsLeft--;
-
-                hitsText.textContent = hits;
-                shipsLeftText.textContent = shipsLeft;
-
-                statusText.textContent = "💖 Попадание!";
-
-                if (shipsLeft === 0) {
-                    statusText.textContent =
-                        "🏆 Победа! Все корабли уничтожены!";
-                }
-
-            } else {
-
-                enemyCell.classList.add("miss");
-
-                statusText.textContent = "🌊 Мимо";
-
-            }
-
-        });
-
-        enemyBoard.appendChild(enemyCell);
+        board.push(row);
 
     }
 
 }
 
-restartBtn.addEventListener("click", createBoards);
+function canPlaceShip(x, y, length, horizontal){
 
-createBoards();
+    for(let i = -1; i <= 1; i++){
+
+        for(let j = -1; j <= length; j++){
+
+            let nx;
+            let ny;
+
+            if(horizontal){
+
+                nx = x + j;
+                ny = y + i;
+
+            }
+            else{
+
+                nx = x + i;
+                ny = y + j;
+
+            }
+
+            if(
+                nx >= 0 &&
+                nx < SIZE &&
+                ny >= 0 &&
+                ny < SIZE
+            ){
+
+                if(board[ny][nx] === 1){
+
+                    return false;
+
+                }
+
+            }
+
+        }
+
+    }
+
+    return true;
+
+}
+
+function placeShip(length){
+
+    while(true){
+
+        let horizontal = Math.random() < 0.5;
+
+        let x = Math.floor(Math.random() * SIZE);
+        let y = Math.floor(Math.random() * SIZE);
+
+        if(horizontal && x + length > SIZE){
+
+            continue;
+
+        }
+
+        if(!horizontal && y + length > SIZE){
+
+            continue;
+
+        }
+
+        if(!canPlaceShip(x, y, length, horizontal)){
+
+            continue;
+
+        }
+
+        for(let i = 0; i < length; i++){
+
+            if(horizontal){
+
+                board[y][x + i] = 1;
+
+            }
+            else{
+
+                board[y + i][x] = 1;
+
+            }
+
+        }
+
+        break;
+
+    }
+
+}
+
+function generateShips(){
+
+    createEmptyBoard();
+
+    ships.forEach(ship => {
+
+        placeShip(ship);
+
+    });
+
+}
+
+function drawBoard(){
+
+    playerBoard.innerHTML = "";
+
+    for(let y = 0; y < SIZE; y++){
+
+        for(let x = 0; x < SIZE; x++){
+
+            const cell = document.createElement("div");
+
+            cell.classList.add("cell");
+
+            if(board[y][x] === 1){
+
+                cell.classList.add("ship");
+
+            }
+
+            playerBoard.appendChild(cell);
+
+        }
+
+    }
+
+}
+
+generateShips();
+
+drawBoard();
