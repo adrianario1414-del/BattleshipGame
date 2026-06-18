@@ -1,0 +1,42 @@
+body{
+    background:#0f172a;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+
+h1{
+    margin-top:30px;
+}
+
+.boards{
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    flex-wrap:wrap;
+}
+
+.board{
+    display:grid;
+    grid-template-columns:repeat(10,40px);
+    gap:2px;
+}
+
+.cell{
+    width:40px;
+    height:40px;
+    background:#1e293b;
+    border:1px solid #334155;
+}
+
+.ship{
+    background:#3b82f6;
+}
+
+.hit{
+    background:red;
+}
+
+.miss{
+    background:white;
+}
