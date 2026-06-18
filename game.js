@@ -8,7 +8,25 @@ let board = [];
 let enemyBoardData = [];
 let hits = 0;
 function createBoard(){
+function createEnemyBoard(){
 
+    enemyBoardData = [];
+
+    for(let y = 0; y < SIZE; y++){
+
+        let row = [];
+
+        for(let x = 0; x < SIZE; x++){
+
+            row.push(0);
+
+        }
+
+        enemyBoardData.push(row);
+
+    }
+
+}
     board = [];
 
     for(let y = 0; y < SIZE; y++){
