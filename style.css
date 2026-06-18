@@ -40,3 +40,15 @@ h1{
 .miss{
     background:white;
 }
+button{
+    margin-top:20px;
+    padding:12px 25px;
+    font-size:18px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:0.9;
+}
