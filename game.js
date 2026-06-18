@@ -198,6 +198,8 @@ for(let i = 0; i < 100; i++){
 
 generateShips();
 
+createEnemyBoard();
+
 drawBoard();
 
 document
