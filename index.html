@@ -3,33 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Морской бой</title>
+    <title>⚓ Морской бой</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <h1>⚓ Морской бой</h1>
+<h1>⚓ Морской бой</h1>
 
-    <div class="boards">
+<div class="topPanel">
 
-        <div>
-            <h2>Твои корабли</h2>
-            <div class="board" id="playerBoard"></div>
-        </div>
+    <button id="rotateBtn">
+        🔄 Повернуть корабль
+    </button>
 
-        <div>
-            <h2>Противник</h2>
-            <div class="board" id="enemyBoard"></div>
+    <button id="autoBtn">
+        ✨ Авторасстановка
+    </button>
+
+    <button id="restartBtn">
+        🌸 Новая игра
+    </button>
+
+</div>
+
+<p id="status">
+    Расставь корабли
+</p>
+
+<div class="boards">
+
+    <div>
+
+        <h2>
+            Твои корабли
+        </h2>
+
+        <div
+            class="board"
+            id="playerBoard">
         </div>
 
     </div>
 
-    <p id="status">Ожидание игры...</p>
-<button id="restartBtn">Новая игра</button>
+    <div>
 
-<p>Попаданий: <span id="hits">0</span></p>
-   <p>Осталось кораблей противника: <span id="shipsLeft">15</span></p>
-    <script src="game.js"></script>
+        <h2>
+            Противник
+        </h2>
+
+        <div
+            class="board"
+            id="enemyBoard">
+        </div>
+
+    </div>
+
+</div>
+
+<div class="stats">
+
+    <p>
+        Попаданий:
+        <span id="hits">
+            0
+        </span>
+    </p>
+
+    <p>
+        Осталось кораблей:
+        <span id="shipsLeft">
+            10
+        </span>
+    </p>
+
+</div>
+
+<script src="game.js"></script>
 
 </body>
 </html>
