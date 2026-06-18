@@ -126,7 +126,62 @@ function placeShip(length){
 }
 
 function generateShips(){
+function generateEnemyShips(){
 
+    createEnemyBoard();
+
+    ships.forEach(length => {
+
+        let placed = false;
+
+        while(!placed){
+
+            let horizontal = Math.random() < 0.5;
+
+            let x = Math.floor(Math.random() * SIZE);
+            let y = Math.floor(Math.random() * SIZE);
+
+            let possible = true;
+
+            for(let i = 0; i < length; i++){
+
+                let cx = horizontal ? x + i : x;
+                let cy = horizontal ? y : y + i;
+
+                if(
+                    cx >= SIZE ||
+                    cy >= SIZE ||
+                    enemyBoardData[cy][cx] === 1
+                ){
+
+                    possible = false;
+
+                }
+
+            }
+
+            if(!possible){
+
+                continue;
+
+            }
+
+            for(let i = 0; i < length; i++){
+
+                let cx = horizontal ? x + i : x;
+                let cy = horizontal ? y : y + i;
+
+                enemyBoardData[cy][cx] = 1;
+
+            }
+
+            placed = true;
+
+        }
+
+    });
+
+}
     createBoard();
 
     ships.forEach(ship => {
