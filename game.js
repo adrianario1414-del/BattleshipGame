@@ -295,6 +295,8 @@ generateShips();
 
 generateEnemyShips();
 
+hits = 0;
+
 drawBoard();
 
 document
