@@ -121,7 +121,9 @@ function generateShips(){
 function drawBoard(){
 
     playerBoard.innerHTML = "";
+    enemyBoard.innerHTML = "";
 
+    // поле игрока
     for(let y = 0; y < SIZE; y++){
 
         for(let x = 0; x < SIZE; x++){
@@ -133,6 +135,27 @@ function drawBoard(){
             if(board[y][x] === 1){
 
                 cell.classList.add("ship");
+
+            }
+
+            playerBoard.appendChild(cell);
+
+        }
+
+    }
+
+    // поле противника
+    for(let i = 0; i < 100; i++){
+
+        const enemyCell = document.createElement("div");
+
+        enemyCell.classList.add("cell");
+
+        enemyBoard.appendChild(enemyCell);
+
+    }
+
+}
 
             }
 
