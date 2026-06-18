@@ -141,7 +141,17 @@ function drawBoard(){
         }
 
     }
+enemyBoard.innerHTML = "";
 
+for(let i = 0; i < 100; i++){
+
+    const enemyCell = document.createElement("div");
+
+    enemyCell.classList.add("cell");
+
+    enemyBoard.appendChild(enemyCell);
+
+}
 }
 
 generateShips();
